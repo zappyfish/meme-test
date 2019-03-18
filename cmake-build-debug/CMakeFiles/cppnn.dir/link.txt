@@ -1,0 +1,1 @@
+/usr/local/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/cppnn.dir/main.cpp.o  -o cppnn /usr/local/lib/libtensorflow_framework.so /usr/local/lib/libtensorflow_cc.so 
