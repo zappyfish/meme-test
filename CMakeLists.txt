@@ -3,7 +3,7 @@ project(cppnn)
 
 set (CMAKE_CXX_STANDARD 14)
 
-set (CMAKE_CXX_FLAGS "-Wl, --allow-multiple-definition, -Wl, --whole-archive")
+set (CMAKE_CXX_FLAGS "-Wl, --allow-multiple-definition -Wl, --whole-archive")
 
 find_package( OpenCV REQUIRED )
 find_package(Boost COMPONENTS system filesystem REQUIRED)
