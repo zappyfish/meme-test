@@ -3,7 +3,8 @@ project(cppnn)
 
 set (CMAKE_CXX_STANDARD 14)
 
-set (CMAKE_CXX_FLAGS "-Wl,--allow-multiple-definition -Wl,--whole-archive")
+set(CXX_FLAGS “-Wall -undefined dynamic_lookup”)
+set(CMAKE_CXX_FLAGS “${CXX_FLAGS}”)
 
 find_package( OpenCV REQUIRED )
 find_package(Boost COMPONENTS system filesystem REQUIRED)
