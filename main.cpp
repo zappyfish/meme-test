@@ -18,8 +18,8 @@ void fillTensor(cv::Mat &src, Tensor &tensor, int startCol);
 
 int main() {
     // set up your input paths
-    const string pathToGraph = "model-199160.meta";
-    const string checkpointPath = "model-199160";
+    const string pathToGraph = "output_graph.pb";
+    // const string checkpointPath = "model-199160";
 
     auto options = tensorflow::SessionOptions();
     options.config.mutable_gpu_options()->set_per_process_gpu_memory_fraction(0.2);
@@ -46,17 +46,17 @@ int main() {
     }
 
 // Read weights from the saved checkpoint
-    Tensor checkpointPathTensor(DT_STRING, TensorShape());
-    checkpointPathTensor.scalar<std::string>()() = checkpointPath;
-
-    status = session->Run(
-            {{ graph_def.saver_def().filename_tensor_name(), checkpointPathTensor },},
-            {},
-            {graph_def.saver_def().restore_op_name()},
-            nullptr);
-    if (!status.ok()) {
-        throw runtime_error("Error loading checkpoint from " + checkpointPath + ": " + status.ToString());
-    }
+//    Tensor checkpointPathTensor(DT_STRING, TensorShape());
+//    checkpointPathTensor.scalar<std::string>()() = checkpointPath;
+//
+//    status = session->Run(
+//            {{ graph_def.saver_def().filename_tensor_name(), checkpointPathTensor },},
+//            {},
+//            {graph_def.saver_def().restore_op_name()},
+//            nullptr);
+//    if (!status.ok()) {
+//        throw runtime_error("Error loading checkpoint from " + checkpointPath + ": " + status.ToString());
+//    }
 
 // and run the inference to your liking
 
