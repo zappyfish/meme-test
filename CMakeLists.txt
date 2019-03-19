@@ -8,8 +8,14 @@ set (CMAKE_CXX_FLAGS "-Wl,--allow-multiple-definition -Wl,--whole-archive")
 find_package( OpenCV REQUIRED )
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}")
+
+find_package(TensorFlow REQUIRED)
+
+set(PROJECT_INCLUDE_DIRS ${TensorFlow_INCLUDE_DIRS})
+
 add_executable(cppnn main.cpp)
 
-find_library(tensorflowlib libtensorflow_all.so)
-target_link_libraries(cppnn ${tensorflowlib} ${OpenCV_LIBS} ${Boost_LIBRARIES})
+include_directories(${PROJECT_INCLUDE_DIRS})
+target_link_libraries(cppnn ${tensorflowlib} ${OpenCV_LIBS} ${Boost_LIBRARIES} ${TensorFlow_LIBRARIES})
 
