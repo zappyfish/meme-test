@@ -10,7 +10,6 @@ find_package(Boost COMPONENTS system filesystem REQUIRED)
 
 add_executable(cppnn main.cpp)
 
-find_library(tensorflowlibfwk libtensorflow_framework.so)
-find_library(tensorflowlibcc libtensorflow_cc.so)
-target_link_libraries(cppnn ${tensorflowlibfwk} ${tensorflowlibcc} ${OpenCV_LIBS} ${Boost_LIBRARIES})
+find_library(tensorflowlib libtensorflow_all.so)
+target_link_libraries(cppnn ${tensorflowlib} ${OpenCV_LIBS} ${Boost_LIBRARIES})
 
