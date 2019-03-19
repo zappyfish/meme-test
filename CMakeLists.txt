@@ -3,7 +3,7 @@ project(cppnn)
 
 set (CMAKE_CXX_STANDARD 14)
 
-set(CXX_FLAGS “-Wall -undefined dynamic_lookup”)
+set(CXX_FLAGS “-Wl --undefined dynamic_lookup”)
 set(CMAKE_CXX_FLAGS “${CXX_FLAGS}”)
 
 find_package( OpenCV REQUIRED )
