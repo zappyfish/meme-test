@@ -21,8 +21,11 @@ int main() {
     const string pathToGraph = "model-199160.meta";
     const string checkpointPath = "model-199160";
 
+    auto options = tensorflow::SessionOptions();
+    options.config.mutable_gpu_options()->set_per_process_gpu_memory_fraction(0.2);
+    options.config.mutable_gpu_options()->set_allow_growth(true);
 
-    auto session = NewSession(SessionOptions());
+    auto session = NewSession(options);
     if (session == nullptr) {
         throw runtime_error("Could not create Tensorflow session.");
     }
