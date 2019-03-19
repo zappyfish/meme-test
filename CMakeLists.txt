@@ -11,5 +11,5 @@ find_package(Boost COMPONENTS system filesystem REQUIRED)
 add_executable(cppnn main.cpp)
 
 include_directories(${PROJECT_INCLUDE_DIRS})
-target_link_libraries(cppnn ${OpenCV_LIBS} ${Boost_LIBRARIES} ${TensorFlow_LIBRARIES} tensorflow_cc)
+target_link_libraries(cppnn ${OpenCV_LIBS} ${Boost_LIBRARIES} ${TensorFlow_LIBRARIES} tensorflow_cc tensorflow_framework)
 
