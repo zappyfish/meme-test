@@ -18,8 +18,8 @@ void fillTensor(cv::Mat &src, Tensor &tensor, int startCol);
 
 int main() {
     // set up your input paths
-    const string pathToGraph = "output_graph.pb";
-    // const string checkpointPath = "model-199160";
+    const string graph_fn = "model-199160.meta";
+    const string checkpoint_fn = "model-199160";
 
     auto options = tensorflow::SessionOptions();
     options.config.mutable_gpu_options()->set_per_process_gpu_memory_fraction(0.2);
@@ -34,16 +34,10 @@ int main() {
 
 // Read in the protobuf graph we exported
     MetaGraphDef graph_def;
-    status = ReadBinaryProto(Env::Default(), pathToGraph, &graph_def);
-    if (!status.ok()) {
-        throw runtime_error("Error reading graph definition from " + pathToGraph + ": " + status.ToString());
-    }
+    TF_CHECK_OK(ReadBinaryProto(tensorflow::Env::Default(), graph_fn, &graph_def));
 
-// Add the graph to the session
-    status = session->Create(graph_def.graph_def());
-    if (!status.ok()) {
-        throw runtime_error("Error creating graph: " + status.ToString());
-    }
+    TF_CHECK_OK(session->Create(graph_def.graph_def()));
+
 
 // Read weights from the saved checkpoint
 //    Tensor checkpointPathTensor(DT_STRING, TensorShape());
