@@ -75,7 +75,9 @@ int main() {
             tensor_dict feedDict = {
                     {"input", imgTensor}
             };
+            std::cout << "feed me\n";
             status = session->Run(feedDict, {}, {}, &outputTensors);
+            std::cout << "feeded\n";
             imgs[0] = imgs[1];
             imgs[1] = imgs[2]; // shift over
             std::cout << outputTensors.size() << std::endl;
