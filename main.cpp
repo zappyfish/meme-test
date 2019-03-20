@@ -15,6 +15,7 @@ typedef std::vector<std::pair<std::string, tensorflow::Tensor>> tensor_dict;
 cv::Mat loadImageFloat(std::string &path);
 Tensor getTensor(cv::Mat &inp1, cv::Mat &inp2, cv::Mat &inp3);
 void fillTensor(cv::Mat &src, Tensor &tensor, int start);
+cv::Mat getResized(cv::Mat &im);
 
 int main() {
     // set up your input paths
@@ -66,7 +67,7 @@ int main() {
 
     for (const auto & path: paths) {
         cv::Mat test_img = cv::imread(path);
-        imgs[num_images] = test_img;
+        imgs[num_images] = getResized(test_img);
         if (num_images < 3) {
             num_images++;
         }
@@ -114,4 +115,11 @@ void fillTensor(cv::Mat &src, Tensor &tensor, int start) {
 
         }
     }
+}
+
+cv::Mat getResized(cv::Mat &im) {
+    cv::Size size(416,128);//the dst image size,e.g.100x100
+    cv::Mat dst;//dst image
+    cv::resize(src,dst,size);//resize image
+    return dst;
 }
