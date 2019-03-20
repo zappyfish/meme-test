@@ -56,7 +56,7 @@ int main() {
 
     std::vector<tensorflow::Tensor> outputTensors;
 
-    std::string path = "/Users/liamkelly/vadl/nvidia/scripts/post-processing/pre-processed-data/feb28_5/images";
+    std::string path = "/home/nvidia/test/images";
     std::vector<std::string> paths;
     for (const auto & entry : fs::directory_iterator(path)) {
         paths.push_back(entry.path().string());
