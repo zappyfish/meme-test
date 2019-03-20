@@ -106,9 +106,12 @@ void fillTensor(cv::Mat &src, Tensor &tensor, int startCol) {
             cv::Vec3b pixel = src.at<cv::Vec3b>(row, col);
             std::cout << "pixel lol\n";
             // TODO: check if it should be 0, 1, 2 pixel order instead
-            input_tensor_mapped(0, row, col + startCol, 0) = pixel[2];
-            input_tensor_mapped(0, row, col + startCol, 1) = pixel[1];
-            input_tensor_mapped(0, row, col + startCol, 2) = pixel[0];
+//            input_tensor_mapped(0, row, col + startCol, 0) = pixel[2];
+//            input_tensor_mapped(0, row, col + startCol, 1) = pixel[1];
+//            input_tensor_mapped(0, row, col + startCol, 2) = pixel[0];
+            input_tensor_mapped(0, row, col + startCol, 0) = 0;
+            input_tensor_mapped(0, row, col + startCol, 1) = 0;
+            input_tensor_mapped(0, row, col + startCol, 2) = 0;
 
         }
     }
