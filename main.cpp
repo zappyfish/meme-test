@@ -120,6 +120,6 @@ void fillTensor(cv::Mat &src, Tensor &tensor, int start) {
 cv::Mat getResized(cv::Mat &im) {
     cv::Size size(416,128);//the dst image size,e.g.100x100
     cv::Mat dst;//dst image
-    cv::resize(src,dst,size);//resize image
+    cv::resize(im,dst,size);//resize image
     return dst;
 }
