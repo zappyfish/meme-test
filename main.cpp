@@ -99,11 +99,13 @@ Tensor getTensor(cv::Mat &inp1, cv::Mat &inp2, cv::Mat &inp3) {
 }
 
 void fillTensor(cv::Mat &src, Tensor &tensor, int startCol) {
+    std::cout << "filling tensor\n";
     auto input_tensor_mapped = tensor.tensor<float, 4>();
     for (int row = 0; row < src.rows; row++) {
         for (int col = 0; col < src.cols; col++) {
             cv::Vec3b pixel = src.at<cv::Vec3b>(row, col);
 
+            // TODO: check if it should be 0, 1, 2 pixel order instead
             input_tensor_mapped(0, row, col + startCol, 0) = pixel[2];
             input_tensor_mapped(0, row, col + startCol, 1) = pixel[1];
             input_tensor_mapped(0, row, col + startCol, 2) = pixel[0];

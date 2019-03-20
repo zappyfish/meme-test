@@ -37,7 +37,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="1780" />
+          <entry key="cpp" value="1891" />
           <entry key="h" value="70" />
           <entry key="txt" value="243" />
         </counts>
@@ -45,7 +45,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CMakeLists.txt" value="243" />
-          <entry key="ObjectiveC" value="1850" />
+          <entry key="ObjectiveC" value="1961" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -111,8 +111,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="38" column="20" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="20" />
+            <state relative-caret-position="647">
+              <caret line="101" column="36" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="36" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -259,12 +259,12 @@
       <workItem from="1551895145789" duration="14140000" />
       <workItem from="1552420152648" duration="2000" />
       <workItem from="1552494548803" duration="124000" />
-      <workItem from="1552887549375" duration="6791000" />
+      <workItem from="1552887549375" duration="7028000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23606000" />
+    <option name="totallyTimeSpent" value="23843000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -404,8 +404,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="38" column="20" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="20" />
+        <state relative-caret-position="647">
+          <caret line="101" column="36" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="36" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
