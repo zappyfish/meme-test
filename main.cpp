@@ -55,8 +55,6 @@ int main() {
 
 // and run the inference to your liking
 
-    std::vector<tensorflow::Tensor> outputTensors;
-
     std::string path = "/home/nvidia/test/images";
     std::vector<std::string> paths;
     for (const auto & entry : fs::directory_iterator(path)) {
@@ -79,7 +77,8 @@ int main() {
                     {"input", imgTensor}
             };
             std::cout << "feed me\n";
-            status = session->Run(feedDict, {"egomotion_prediction/pose_exp_net/pose/concat"}, {}, &outputTensors);
+            std::vector<tensorflow::Tensor> outputTensors;
+            status = session->Run(feedDict, {}, {"egomotion_prediction/pose_exp_net/pose/concat"}, &outputTensors);
             std::cout << "feeded\n";
             imgs[0] = imgs[1];
             imgs[1] = imgs[2]; // shift over
