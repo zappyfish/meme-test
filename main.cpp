@@ -67,9 +67,11 @@ int main() {
 
     for (const auto & path: paths) {
         cv::Mat test_img = cv::imread(path);
-        imgs[num_images] = getResized(test_img);
         if (num_images < 3) {
+            imgs[num_images] = getResized(test_img);
             num_images++;
+        } else {
+            imgs[2] = getResized(test_img);
         }
         if (num_images == 3) {
             Tensor imgTensor = getTensor(imgs[0], imgs[1], imgs[2]);
