@@ -78,6 +78,8 @@ int main() {
             status = session->Run(feedDict, {}, {}, &outputTensors);
             imgs[0] = imgs[1];
             imgs[1] = imgs[2]; // shift over
+            std::cout << outputTensors.size() << std::endl;
+            std::cout << outputTensors[0].tensor<float, 6>() << std::endl;
         }
     }
 
