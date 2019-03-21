@@ -14,6 +14,7 @@ typedef std::vector<std::pair<std::string, tensorflow::Tensor>> tensor_dict;
 
 cv::Mat loadImageFloat(std::string &path);
 Tensor getTensor(cv::Mat &stack);
+Tensor getInputTensor(cv::Mat &im1, cv::Mat &im2, cv::Mat &im3);
 void fillTensor(cv::Mat &src, Tensor &tensor, int start);
 cv::Mat getResized(cv::Mat &im);
 cv::Mat getStack(cv::Mat *mats);
@@ -79,7 +80,7 @@ int main() {
         }
         if (num_images == 3) {
             cv::Mat stack = getStack(imgs);
-            Tensor imgTensor = getTensor(stack);
+            Tensor imgTensor = getInputTensor(imgs[0], imgs[1], imgs[2]);
             tensor_dict feedDict = {
                     {"truediv_1:0", imgTensor}
             };
@@ -132,6 +133,29 @@ Tensor getInputImageStack() {
     return inputImageStack;
 }
 
+Tensor getInputTensor(cv::Mat &im1, cv::Mat &im2, cv::Mat &im3) {
+    tensorflow::Tensor tensor(tensorflow::DT_FLOAT,
+                                    tensorflow::TensorShape({1, im1.rows, im1.cols, 9}));
+
+    fillTensor(im1, tensor, 0);
+    fillTensor(im2, tensor, 3);
+    fillTensor(im2, tensor, 6);
+
+    return tensor;
+}
+
+void fillTensor(cv::Mat &src, Tensor &tensor, int start) {
+    auto input_tensor_mapped = tensor.tensor<float, 4>();
+    for (int row = 0; row < src.rows; row++) {
+        for (int col = 0; col < src.cols; col++) {
+            cv::Vec3b pixel = src.at<cv::Vec3b>(row, col);
+            for (int i = 0; i < 3; i++) {
+                input_tensor_mapped(0, row, col, i + start) = pixel[2 - i]; // TODO: BGR or RGB???
+            }
+        }
+    }
+}
+
 Tensor getTensor(cv::Mat &stack) {
 
     tensorflow::Tensor input_tensor(tensorflow::DT_FLOAT,
@@ -162,7 +186,8 @@ cv::Mat getResized(cv::Mat &im) {
 }
 
 cv::Mat getStack(cv::Mat *mats) {
-    cv::Mat stack(416, 128, 9);
+    cv::Size size(416, 128, 9);
+    cv::Mat stack(size);
     for (int img = 0; img < 3; img++) {
         cv::Mat cur = mats[img];
         for (int row = 0; row < 128; row++) {
