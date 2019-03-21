@@ -194,10 +194,6 @@ cv::Mat getResized(cv::Mat &im) {
     cv::Mat scaled;
     dst.convertTo(scaled, CV_32F, 1.0/255.0);
 
-    for (int i = 0; i < 10; i++) {
-        std::cout << scaled << std::endl;
-    }
-
     return scaled;
 }
 
