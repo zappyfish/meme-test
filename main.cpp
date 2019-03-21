@@ -44,9 +44,7 @@ int main() {
     {
         auto n = graph_def.graph_def().node(i);
         std::string nm = n.name();
-        if (nm.find("egomotion_prediction/pose_exp_net/pose/") != std::string::npos) {
-            cout<<"Names : "<< n.name() <<endl;
-        }
+        
         if (nm.find("truediv") != std::string::npos) {
             cout<<"input : "<< n.name() <<endl;
         }
