@@ -74,11 +74,11 @@ int main() {
         if (num_images == 3) {
             Tensor imgTensor = getTensor(imgs[0], imgs[1], imgs[2]);
             tensor_dict feedDict = {
-                    {"input", imgTensor}
+                    {"truediv_1:0", imgTensor}
             };
             std::cout << "feed me\n";
             std::vector<tensorflow::Tensor> outputTensors;
-            status = session->Run(feedDict, {}, {"egomotion_prediction/pose_exp_net/pose/concat"}, &outputTensors);
+            status = session->Run(feedDict, {"egomotion_prediction/pose_exp_net/pose/concat:0"}, {}, &outputTensors);
             std::cout << "feeded\n";
             imgs[0] = imgs[1];
             imgs[1] = imgs[2]; // shift over
