@@ -215,6 +215,7 @@ std::vector<std::string> getVars() {
     while (std::getline(file, str))
     {
         vars.push_back(str);
+        std::cout << str << std::endl;
     }
     return vars;
 }
