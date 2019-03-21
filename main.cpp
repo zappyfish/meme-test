@@ -45,9 +45,9 @@ int main() {
         auto n = graph_def.graph_def().node(i);
         std::string nm = n.name();
 
-        if (nm.find("egomotion_prediction") != std::string::npos) {
-            cout<<"input : "<< n.name() <<endl;
-        }
+//        if (nm.find("egomotion_prediction") != std::string::npos) {
+//            cout<<"input : "<< n.name() <<endl;
+//        }
 
     }
 
@@ -92,11 +92,12 @@ int main() {
         if (num_images == 3) {
             Tensor imgTensor = getInputTensor(imgs[0], imgs[1], imgs[2]);
             tensor_dict feedDict = {
-                    {"truediv_1", imgTensor}
+                    {"truediv_1:0", imgTensor}
             };
+            imgTensor.DebugString();
             std::cout << "feed me\n";
             std::vector<tensorflow::Tensor> outputTensors;
-            status = session->Run(feedDict, {"egomotion_prediction/pose_exp_net/pose/concat"}, {}, &outputTensors);
+            status = session->Run(feedDict, {"egomotion_prediction/pose_exp_net/pose/concat:0"}, {}, &outputTensors);
             std::cout << "feeded\n";
             imgs[0] = imgs[1];
             imgs[1] = imgs[2]; // shift over
