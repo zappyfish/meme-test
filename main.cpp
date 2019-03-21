@@ -45,7 +45,7 @@ int main() {
         auto n = graph_def.graph_def().node(i);
         std::string nm = n.name();
 
-        if (nm == "egomotion_prediction/pose_exp_net/pose/concat") {
+        if (nm == "egomotion_prediction/pose_exp_net/pose/concat" || nm == "truediv_1") {
             n.PrintDebugString();
         }
 
