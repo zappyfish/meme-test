@@ -94,7 +94,7 @@ int main() {
             tensor_dict feedDict = {
                     {"truediv_1:0", imgTensor}
             };
-            imgTensor.DebugString();
+            std::cout << imgTensor.DebugString();
             std::cout << "feed me\n";
             std::vector<tensorflow::Tensor> outputTensors;
             status = session->Run(feedDict, {"egomotion_prediction/pose_exp_net/pose/concat:0"}, {}, &outputTensors);
