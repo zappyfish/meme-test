@@ -79,7 +79,7 @@ int main() {
 
     // auto inputImageStack = getInputImageStack();
 
-    std::vector<std::string> outputOps = {"egomotion_prediction", "egomotion_prediction/pose_exp_net/pose/concat"};
+    std::vector<std::string> outputOps = {"egomotion_prediction/pose_exp_net/pose/concat"};
 
     for (const auto & path: paths) {
         cv::Mat test_img = cv::imread(path);
