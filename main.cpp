@@ -92,7 +92,6 @@ int main() {
             imgs[2] = getResized(test_img);
         }
         if (num_images == 3) {
-            std::cout << imgs[1] << std::endl;
             Tensor imgTensor = getInputTensor(imgs[1], imgs[0], imgs[2]); // TODO: swap order
 
             auto x = imgTensor.tensor<float, 4>();
