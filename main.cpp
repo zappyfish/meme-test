@@ -92,7 +92,7 @@ int main() {
         if (num_images == 3) {
             Tensor imgTensor = getInputTensor(imgs[0], imgs[1], imgs[2]);
             tensor_dict feedDict = {
-                    {"truediv_1", imgTensor}
+                    {"input", imgTensor}
             };
             std::cout << "feed me\n";
             std::vector<tensorflow::Tensor> outputTensors;
