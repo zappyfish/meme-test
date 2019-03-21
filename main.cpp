@@ -18,6 +18,7 @@ Tensor getInputTensor(cv::Mat &im1, cv::Mat &im2, cv::Mat &im3);
 void fillTensor(cv::Mat &src, Tensor &tensor, int start);
 cv::Mat getResized(cv::Mat &im);
 Tensor getInputImageStack();
+std::vector<std::string> getVars();
 
 int main() {
     // set up your input paths
@@ -55,16 +56,20 @@ int main() {
 
 
 // Read weights from the saved checkpoint
-    Tensor checkpointPathTensor(DT_STRING, TensorShape());
-    checkpointPathTensor.scalar<std::string>()() = checkpoint_fn;
-    status = session->Run(
-            {{ graph_def.saver_def().filename_tensor_name(), checkpointPathTensor },},
-            {},
-            {graph_def.saver_def().restore_op_name()},
-            nullptr);
-    if (!status.ok()) {
-        throw runtime_error("Error loading checkpoint from " + checkpoint_fn + ": " + status.ToString());
-    }
+    std::vector<tensorflow::Tensor> out;
+    session->Run({}, getVars(), {}, &out);
+
+    std::cout << out.size() << std::endl;
+//    Tensor checkpointPathTensor(DT_STRING, TensorShape());
+//    checkpointPathTensor.scalar<std::string>()() = checkpoint_fn;
+//    status = session->Run(
+//            {{ graph_def.saver_def().filename_tensor_name(), checkpointPathTensor },},
+//            {},
+//            {graph_def.saver_def().restore_op_name()},
+//            nullptr);
+//    if (!status.ok()) {
+//        throw runtime_error("Error loading checkpoint from " + checkpoint_fn + ": " + status.ToString());
+//    }
 
     std::string path = "/home/nvidia/test/images";
     std::vector<std::string> paths;
@@ -204,3 +209,13 @@ cv::Mat getResized(cv::Mat &im) {
     return scaled;
 }
 
+std::vector<std::string> getVars() {
+    std::ifstream file("vars.txt");
+    std::string str;
+    std::vector<std::string> vars;
+    while (std::getline(file, str))
+    {
+        vars.push_back(str);
+    }
+    return vars;
+}
