@@ -43,7 +43,10 @@ int main() {
     for (int i = 0; i < node_count; i++)
     {
         auto n = graph_def.graph_def().node(i);
-        cout<<"Names : "<< n.name() <<endl;
+        std::string nm = n.name();
+        if (nm.find("egomotion") != std::string::npos) {
+            cout<<"Names : "<< n.name() <<endl;
+        }
 
     }
 
