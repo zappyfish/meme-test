@@ -90,7 +90,7 @@ int main() {
             imgs[2] = getResized(test_img);
         }
         if (num_images == 3) {
-            Tensor imgTensor = getInputTensor(imgs[0], imgs[1], imgs[2]);
+            Tensor imgTensor = getInputTensor(imgs[1], imgs[0], imgs[2]); // TODO: swap order
             tensor_dict feedDict = {
                     {"truediv_1", imgTensor}
             };
@@ -192,6 +192,12 @@ cv::Mat getResized(cv::Mat &im) {
     cv::Mat dst;//dst image
     cv::resize(im,dst,size);//resize image
     cv::Mat scaled;
-    dst.convertTo(scaled, CV_32F, 1.0 / 255, 0);
+    dst.convertTo(scaled, CV_32F, 1.0/255.0);
+
+    for (int i = 0; i < 10; i++) {
+        std::cout << scaled.at<float>(i, 0, 1) << std::endl;
+    }
+
     return scaled;
 }
+
