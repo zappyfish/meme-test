@@ -55,19 +55,16 @@ int main() {
 
 
 // Read weights from the saved checkpoint
-//    Tensor checkpointPathTensor(DT_STRING, TensorShape());
-//    checkpointPathTensor.scalar<std::string>()() = checkpointPath;
-//
-//    status = session->Run(
-//            {{ graph_def.saver_def().filename_tensor_name(), checkpointPathTensor },},
-//            {},
-//            {graph_def.saver_def().restore_op_name()},
-//            nullptr);
-//    if (!status.ok()) {
-//        throw runtime_error("Error loading checkpoint from " + checkpointPath + ": " + status.ToString());
-//    }
-
-// and run the inference to your liking
+    Tensor checkpointPathTensor(DT_STRING, TensorShape());
+    checkpointPathTensor.scalar<std::string>()() = checkpoint_fn;
+    status = session->Run(
+            {{ graph_def.saver_def().filename_tensor_name(), checkpointPathTensor },},
+            {},
+            {graph_def.saver_def().restore_op_name()},
+            nullptr);
+    if (!status.ok()) {
+        throw runtime_error("Error loading checkpoint from " + checkpoint_fn + ": " + status.ToString());
+    }
 
     std::string path = "/home/nvidia/test/images";
     std::vector<std::string> paths;
