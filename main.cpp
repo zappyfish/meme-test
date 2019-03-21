@@ -65,7 +65,7 @@ int main() {
     int num_images = 0;
     cv::Mat imgs[3];
 
-    auto inputImageStack = getInputImageStack();
+    // auto inputImageStack = getInputImageStack();
 
 
 
