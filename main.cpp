@@ -92,9 +92,7 @@ int main() {
         if (num_images == 3) {
             std::cout << imgs[1] << std::endl;
             Tensor imgTensor = getInputTensor(imgs[1], imgs[0], imgs[2]); // TODO: swap order
-            tensor_dict feedDict = {
-                    {"truediv_1", imgTensor}
-            };
+
             auto x = imgTensor.tensor<float, 4>();
             for (int row = 0; row < 128; row++) {
                 for (int col = 0; col < 416; col++) {
@@ -103,6 +101,9 @@ int main() {
                     }
                 }
             }
+            tensor_dict feedDict = {
+                    {"truediv_1", imgTensor}
+            };
             std::cout << imgTensor.DebugString();
             std::cout << "feed me\n";
             std::vector<tensorflow::Tensor> outputTensors;
