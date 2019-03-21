@@ -40,14 +40,16 @@ int main() {
     TF_CHECK_OK(ReadBinaryProto(tensorflow::Env::Default(), graph_fn, &graph_def));
 
     int node_count = graph_def.graph_def().node_size();
-    for (int i = 0; i < node_count; i++)
+    for (int i = 0; i < 50; i++)
     {
         auto n = graph_def.graph_def().node(i);
         std::string nm = n.name();
 
-        if (nm == "egomotion_prediction/pose_exp_net/pose/concat" || nm == "truediv_1") {
-            n.PrintDebugString();
-        }
+        n.PrintDebugString();
+
+//        if (nm == "egomotion_prediction/pose_exp_net/pose/concat" || nm == "truediv_1") {
+//            n.PrintDebugString();
+//        }
 
     }
 
@@ -96,7 +98,7 @@ int main() {
             };
             std::cout << "feed me\n";
             std::vector<tensorflow::Tensor> outputTensors;
-            status = session->Run(feedDict, {"egomotion_prediction/pose_exp_net/pose/concat"}, {}, &outputTensors);
+            status = session->Run(feedDict, {"egomotion_prediction/concat"}, {}, &outputTensors);
             std::cout << "feeded\n";
             imgs[0] = imgs[1];
             imgs[1] = imgs[2]; // shift over
