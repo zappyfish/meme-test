@@ -17,7 +17,6 @@ Tensor getTensor(cv::Mat &stack);
 Tensor getInputTensor(cv::Mat &im1, cv::Mat &im2, cv::Mat &im3);
 void fillTensor(cv::Mat &src, Tensor &tensor, int start);
 cv::Mat getResized(cv::Mat &im);
-cv::Mat getStack(cv::Mat *mats);
 Tensor getInputImageStack();
 
 int main() {
@@ -79,7 +78,6 @@ int main() {
             imgs[2] = getResized(test_img);
         }
         if (num_images == 3) {
-            cv::Mat stack = getStack(imgs);
             Tensor imgTensor = getInputTensor(imgs[0], imgs[1], imgs[2]);
             tensor_dict feedDict = {
                     {"truediv_1:0", imgTensor}
@@ -183,19 +181,4 @@ cv::Mat getResized(cv::Mat &im) {
     cv::Mat scaled;
     dst.convertTo(scaled, CV_32F, 1.0 / 255, 0);
     return scaled;
-}
-
-cv::Mat getStack(cv::Mat *mats) {
-    cv::Size size(416, 128, 9);
-    cv::Mat stack(size);
-    for (int img = 0; img < 3; img++) {
-        cv::Mat cur = mats[img];
-        for (int row = 0; row < 128; row++) {
-            for (int col = 0; col < 416; col++) {
-                for (int d = 0; d < 3; d++) {
-                    stack.at<float>(row, col, d + img * 3) = cur.at<float>(row, col, d);
-                }
-            }
-        }
-    }
 }
