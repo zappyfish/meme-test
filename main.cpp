@@ -45,7 +45,7 @@ int main() {
         auto n = graph_def.graph_def().node(i);
         std::string nm = n.name();
 
-        if (nm.find("truediv_1") != std::string::npos && nm.find("egomotion") != std::string::npos) {
+        if (nm.find("truediv") != std::string::npos && nm.find("egomotion") != std::string::npos) {
             cout<<"input : "<< n.name() <<endl;
         }
 
