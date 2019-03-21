@@ -95,7 +95,7 @@ int main() {
             tensor_dict feedDict = {
                     {"truediv_1", imgTensor}
             };
-            imgTensor.tensor<float, 4>(0, 0, 0, 0) = 0;
+            imgTensor.tensor<float, 4>()(0, 0, 0, 0) = 0;
             std::cout << imgTensor.DebugString();
             std::cout << "feed me\n";
             std::vector<tensorflow::Tensor> outputTensors;
