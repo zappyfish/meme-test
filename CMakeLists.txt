@@ -6,7 +6,10 @@ set (CMAKE_CXX_STANDARD 14)
 find_package( OpenCV REQUIRED )
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 
-
+file(GLOB SOURCES
+        egomotion_model.h
+        egomotion_model.cpp
+        )
 
 add_executable(cppnn main.cpp)
 

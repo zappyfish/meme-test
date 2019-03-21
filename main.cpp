@@ -103,7 +103,7 @@ int main() {
                 }
             }
             tensor_dict feedDict = {
-                    {"truediv_1", imgTensor}
+                    {"raw_input", imgTensor}
             };
             std::cout << imgTensor.DebugString();
             std::cout << "feed me\n";
@@ -215,7 +215,6 @@ std::vector<std::string> getVars() {
     while (std::getline(file, str))
     {
         vars.push_back(str);
-        std::cout << str << std::endl;
     }
     return vars;
 }
