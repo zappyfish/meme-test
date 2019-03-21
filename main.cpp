@@ -39,6 +39,14 @@ int main() {
     MetaGraphDef graph_def;
     TF_CHECK_OK(ReadBinaryProto(tensorflow::Env::Default(), graph_fn, &graph_def));
 
+    int node_count = graph_def.graph_def().node_size();
+    for (int i = 0; i < node_count; i++)
+    {
+        auto n = graph_def.graph_def().node(i);
+        cout<<"Names : "<< n.name() <<endl;
+
+    }
+
     TF_CHECK_OK(session->Create(graph_def.graph_def()));
 
 

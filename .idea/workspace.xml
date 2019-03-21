@@ -11,9 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="33d53672-4f8b-4fc3-b6c9-376b201f677a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="33d53672-4f8b-4fc3-b6c9-376b201f677a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +35,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="4468" />
+          <entry key="cpp" value="4472" />
           <entry key="h" value="70" />
           <entry key="txt" value="243" />
         </counts>
@@ -45,7 +43,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CMakeLists.txt" value="243" />
-          <entry key="ObjectiveC" value="4538" />
+          <entry key="ObjectiveC" value="4542" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -108,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="82" column="71" selection-start-line="82" selection-start-column="71" selection-end-line="82" selection-end-column="71" />
+            <state relative-caret-position="284">
+              <caret line="86" column="31" lean-forward="true" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -138,11 +136,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file:///usr/local/include/tensorflow/core/public/session.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+            <state relative-caret-position="500">
+              <caret line="120" column="17" selection-start-line="120" selection-start-column="17" selection-end-line="120" selection-end-column="17" />
+              <folding>
+                <element signature="e#755#772#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -259,12 +260,12 @@
       <workItem from="1551895145789" duration="14140000" />
       <workItem from="1552420152648" duration="2000" />
       <workItem from="1552494548803" duration="124000" />
-      <workItem from="1552887549375" duration="13488000" />
+      <workItem from="1552887549375" duration="13758000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30303000" />
+    <option name="totallyTimeSpent" value="30573000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -303,7 +304,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>88</line>
+          <line>86</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -381,13 +382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/include/tensorflow/core/public/session.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="39" lean-forward="true" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/include/tensorflow/core/framework/tensor.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -404,10 +398,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="82" column="71" selection-start-line="82" selection-start-column="71" selection-end-line="82" selection-end-column="71" />
+        <state relative-caret-position="284">
+          <caret line="86" column="31" lean-forward="true" selection-start-line="86" selection-start-column="31" selection-end-line="86" selection-end-column="31" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/include/tensorflow/core/public/session.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="120" column="17" selection-start-line="120" selection-start-column="17" selection-end-line="120" selection-end-column="17" />
+          <folding>
+            <element signature="e#755#772#0" expanded="true" />
           </folding>
         </state>
       </provider>
