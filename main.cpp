@@ -13,9 +13,11 @@ namespace fs = boost::filesystem;
 typedef std::vector<std::pair<std::string, tensorflow::Tensor>> tensor_dict;
 
 cv::Mat loadImageFloat(std::string &path);
-Tensor getTensor(cv::Mat &inp1, cv::Mat &inp2, cv::Mat &inp3);
+Tensor getTensor(cv::Mat &stack);
 void fillTensor(cv::Mat &src, Tensor &tensor, int start);
 cv::Mat getResized(cv::Mat &im);
+cv::Mat getStack(cv::Mat *mats);
+Tensor getInputImageStack();
 
 int main() {
     // set up your input paths
@@ -63,6 +65,10 @@ int main() {
     int num_images = 0;
     cv::Mat imgs[3];
 
+    auto inputImageStack = getInputImageStack();
+
+
+
     for (const auto & path: paths) {
         cv::Mat test_img = cv::imread(path);
         if (num_images < 3) {
@@ -72,7 +78,8 @@ int main() {
             imgs[2] = getResized(test_img);
         }
         if (num_images == 3) {
-            Tensor imgTensor = getTensor(imgs[0], imgs[1], imgs[2]);
+            cv::Mat stack = getStack(imgs);
+            Tensor imgTensor = getTensor(stack);
             tensor_dict feedDict = {
                     {"truediv_1:0", imgTensor}
             };
@@ -92,31 +99,57 @@ int main() {
     return 0;
 }
 
-Tensor getTensor(cv::Mat &inp1, cv::Mat &inp2, cv::Mat &inp3) {
+Tensor getInputImageStack() {
+    float IMAGENET_MEAN[] = {0.485, 0.456, 0.406};
+    float IMAGENET_SD[] = {0.229, 0.224, 0.225};
+    auto inputImageStack = tensorflow::Tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape(
+            {1, 128, 416, 9}));
+
+    auto im_mean = tensorflow::Tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape{9});
+    auto im_std = tensorflow::Tensor(tensorflow::DT_FLOAT, tensorflow::TensorShape{9});
+
+    auto im_mean_mapped = im_mean.tensor<float, 1>();
+    auto im_std_mapped = im_std.tensor<float, 1>();
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            int ind = i * 3 + j;
+            im_mean_mapped(ind) = IMAGENET_MEAN[j];
+            im_std_mapped(ind) = IMAGENET_SD[j];
+        }
+    }
+
+    auto im_stack_mapped = inputImageStack.tensor<float, 4>();
+
+    for (int row = 0; row < 128; row++) {
+        for (int col = 0; col < 416; col++) {
+            for (int d = 0; d < 9; d++) {
+                im_stack_mapped(0, row, col, d) = (im_stack_mapped(0, row, col, d) - im_mean_mapped(d)) / im_std_mapped(d);
+            }
+        }
+    }
+
+    return inputImageStack;
+}
+
+Tensor getTensor(cv::Mat &stack) {
 
     tensorflow::Tensor input_tensor(tensorflow::DT_FLOAT,
-                                tensorflow::TensorShape({1, inp1.rows, inp1.cols, 9}));
+                                tensorflow::TensorShape({1, stack.rows, stack.cols, 9}));
 
-    fillTensor(inp1, input_tensor, 0);
-    fillTensor(inp2, input_tensor, 3);
-    fillTensor(inp3, input_tensor, 6);
+    auto input_tensor_mapped = input_tensor.tensor<float, 4>();
+    for (int row = 0; row < stack.rows; row++) {
+        for (int col = 0; col < stack.cols; col++) {
+            cv::Vec3b pixel = stack.at<cv::Vec3b>(row, col);
+            for (int i = 0; i < 9; i++) {
+                input_tensor_mapped(0, row, col, i) = pixel[i];
+            }
+        }
+    }
 
     return input_tensor;
 }
 
-void fillTensor(cv::Mat &src, Tensor &tensor, int start) {
-    auto input_tensor_mapped = tensor.tensor<float, 4>();
-    for (int row = 0; row < src.rows; row++) {
-        for (int col = 0; col < src.cols; col++) {
-            cv::Vec3b pixel = src.at<cv::Vec3b>(row, col);
-            // TODO: check if it should be 0, 1, 2 pixel order instead
-            input_tensor_mapped(0, row, col, 0 + start) = pixel[2];
-            input_tensor_mapped(0, row, col, 1 + start) = pixel[1];
-            input_tensor_mapped(0, row, col, 2 + start) = pixel[0];
-
-        }
-    }
-}
 
 cv::Mat getResized(cv::Mat &im) {
     // TODO: convert from 0 to 1 float
@@ -126,4 +159,18 @@ cv::Mat getResized(cv::Mat &im) {
     cv::Mat scaled;
     dst.convertTo(scaled, CV_32F, 1.0 / 255, 0);
     return scaled;
+}
+
+cv::Mat getStack(cv::Mat *mats) {
+    cv::Mat stack(416, 128, 9);
+    for (int img = 0; img < 3; img++) {
+        cv::Mat cur = mats[img];
+        for (int row = 0; row < 128; row++) {
+            for (int col = 0; col < 416; col++) {
+                for (int d = 0; d < 3; d++) {
+                    stack.at<float>(row, col, d + img * 3) = cur.at<float>(row, col, d);
+                }
+            }
+        }
+    }
 }
